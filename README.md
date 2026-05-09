@@ -11,7 +11,7 @@ Pull two long-running space weather records into a local SQLite database, then e
 
 Results land in `spaceweather.sqlite` (~10 MB total). The fetcher is idempotent on the date key — re-running just refreshes the most recent (preliminary) values.
 
-`spaceweather.ipynb` reads the database and produces the five plots below. Each is also written to `figures/` so you can browse them on GitHub without running the notebook.
+`spaceweather.ipynb` reads the database and produces the six plots below. Each is also written to `figures/` so you can browse them on GitHub without running the notebook.
 
 ## Sample output
 
@@ -29,15 +29,30 @@ Cycle 24 (red) is the smallest cycle since Cycle 14 (1902–13). Whether that si
 
 ![Cycle peaks](figures/03_cycle_peaks.png)
 
-### Geomagnetic storm days per year (the detection-bias control)
+### Geomagnetic storm days per year by G-scale
 
-![Storm days](figures/04_storm_days.png)
+A "storm day" here means at least one three-hour interval that day reached the given peak Kp. NOAA's G-scale maps directly: G1 minor = Kp 5, G2 moderate = Kp 6, G3 strong = Kp 7, G4 severe = Kp 8, G5 extreme = Kp 9. Using peak Kp rather than daily-mean Ap matters: a storm that peaks at Kp 8 for three hours and then settles to Kp 3 has its daily Ap diluted by quiet hours, but it still produced a G4 event with mid-latitude aurora.
+
+![Storm days by band](figures/04_storm_days_by_band.png)
+
+### Mid-latitude aurora days (Kp ≥ 7) — the detection-bias control
+
+The closest space-weather analog to the M ≥ 7 earthquake control. A peak Kp of 7 is the threshold where the auroral oval expands far enough south that aurora becomes visible from roughly 45° geomagnetic latitude — northern Illinois, Oregon, central Europe — i.e., from places where it makes the news rather than going unremarked. At Kp 8 (G4) it reaches Tennessee and Virginia; at Kp 9 (G5), the famous historical low-latitude events (Carrington 1859 — Hawaii, Cuba; March 1989 — Texas; Halloween 2003 — Florida; May 2024 — Mexico).
+
+A G3+ storm is large enough to be detected unambiguously by *any* mid-latitude magnetometer, and the Kp network has been operating with the same methodology since 1932. So the year-over-year count reflects real heliospheric activity, not detection-floor improvements. Two trend lines:
+
+- **Full span** (1932–today, 94 years): −0.076 days/year
+- **Post-IGY** (1958–today, 68 years): −0.129 days/year
+
+Both spans show a slight decline. The post-IGY slope being *steeper* than the full-span slope is itself diagnostic: if detection had been improving over time, we'd expect more recent years to register more storms, biasing the slope *positive*. The slopes go the other way, which means whatever's happening is opposite to a detection artifact. The decline is real, and it's about the Sun — specifically the Modern Maximum (Cycles 17–22, roughly 1933–2008) being unusually active and the last two cycles being unusually quiet. Cycle 25 (now active) has already produced one G5 event (May 2024).
+
+![Mid-latitude aurora days](figures/05_aurora_days.png)
 
 ### F10.7 vs sunspot number (the cross-validation)
 
 F10.7 cm radio flux is measured by a single instrument, isn't subject to visual-observer bias, and tracks the same underlying solar activity as the sunspot count. Daily Pearson r ≈ 0.93 since 1947 — the v2.0 sunspot series and the radio flux are measuring the same Sun.
 
-![F10.7 vs sunspot](figures/05_f107_vs_sunspot.png)
+![F10.7 vs sunspot](figures/06_f107_vs_sunspot.png)
 
 ## Why these specific cutoffs
 
@@ -57,7 +72,7 @@ The net effect: every cycle peak in this repo's plots is a v2.0 number. If you c
 
 **Why F10.7 starts in 1947.** The Penticton (BC) radio observatory has measured the 10.7 cm solar flux daily since 1947. Single instrument, single location, single calibration chain — it's the cross-check that lets you ask "is the recalibrated sunspot series consistent with the independent radio measurement?" The answer in this repo is yes (r ≈ 0.93 daily, even higher monthly), which is what justifies treating v2.0 as the reference series.
 
-**What's the M≥7 equivalent.** For seismic data the natural detection-floor-free band is M≥7 — those events register globally regardless of network density. For space weather there's no single equivalent, but the closest is **Ap ≥ 100 storm days**: a severe storm is large enough to be unambiguously detected by *any* mid-latitude magnetometer, and the count per year hasn't been distorted by network expansion since 1932. The plot above shows ~5–10 such days in active years and near-zero in quiet years, tracking the solar cycle cleanly with no secular trend.
+**What's the M≥7 equivalent.** For seismic data the natural detection-floor-free band is M≥7 — those events register globally regardless of network density. For space weather the closest equivalent is **peak Kp ≥ 7 days** (G3 strong storm or worse). The threshold is physically motivated rather than arbitrary: at Kp ≥ 7 the auroral oval expands far enough south to produce aurora visible from ~45° geomagnetic latitude (northern US, central Europe), and a storm of that size disturbs *every* mid-latitude magnetometer in the network — its detection doesn't depend on instrument sensitivity. Counted from peak Kp during the day rather than daily-mean Ap (a Kp 8 spike for one 3-hour window is a G4 event even if the rest of the day was quiet, and that's what determines aurora visibility). The plot above shows the count averages ~8 days/year, peaking at 27 in 1960 (Cycle 19) and 1991 (Cycle 22), and the trend is slightly negative — but the slope going *more* negative on the shorter post-IGY span argues against a detection-improvement explanation, since detection improvements would push the slope positive. The signal is solar: the Modern Maximum (Cycles 17–22) was unusually active, and the last two cycles have been unusually quiet.
 
 ## Setup
 
