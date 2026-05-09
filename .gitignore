@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+Untitled*.ipynb
+
+# Local data (regenerate via `python fetch_spaceweather.py`)
+spaceweather.sqlite
+spaceweather.sqlite-journal
+
+# Backups
+*.bak
+
+# macOS
+.DS_Store
