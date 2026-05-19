@@ -27,11 +27,15 @@ Results land in `spaceweather.sqlite` (~10 MB total). The fetcher is idempotent 
 
 Cycle 24 (red) is the smallest cycle since Cycle 14 (1902–13). Whether that signals the start of a new grand minimum or a normal trough between the bigger Modern Maximum (Cycles 17–22) and whatever comes next was an active debate when Cycle 25 was forecast — and Cycle 25 came in stronger than the consensus prediction, so the "new Maunder" narrative has weakened since 2023.
 
+**Above vs. below the average:** Bars *above* the long-run mean peak are above-average cycles (Cycles 17–22, the Modern Maximum); bars *below* the mean are below-average (Cycles 14 and 24, plus the pre-Modern-Maximum cycles). Cycle 25 is still in progress so its bar will keep growing until its maximum is reached.
+
 ![Cycle peaks](figures/03_cycle_peaks.png)
 
 ### Geomagnetic storm days per year by G-scale
 
 A "storm day" here means at least one three-hour interval that day reached the given peak Kp. NOAA's G-scale maps directly: G1 minor = Kp 5, G2 moderate = Kp 6, G3 strong = Kp 7, G4 severe = Kp 8, G5 extreme = Kp 9. Using peak Kp rather than daily-mean Ap matters: a storm that peaks at Kp 8 for three hours and then settles to Kp 3 has its daily Ap diluted by quiet hours, but it still produced a G4 event with mid-latitude aurora.
+
+**Above vs. below the 11-year-cycle baseline:** The stacked bars naturally follow the ~11-year solar cycle, with peaks during solar max and troughs during solar min. A year whose bar exceeds the typical solar-max peak (~30–50 G1+ days) was unusually active for its cycle phase; a year well below typical solar-min levels (~5 G1+ days) was unusually quiet. The 1989 and 2003 spikes are above-cycle outliers (the March 1989 Quebec storm and Halloween 2003 sequence).
 
 ![Storm days by band](figures/04_storm_days_by_band.png)
 
@@ -46,11 +50,15 @@ A G3+ storm is large enough to be detected unambiguously by *any* mid-latitude m
 
 Both spans show a slight decline. The post-IGY slope being *steeper* than the full-span slope is itself diagnostic: if detection had been improving over time, we'd expect more recent years to register more storms, biasing the slope *positive*. The slopes go the other way, which means whatever's happening is opposite to a detection artifact. The decline is real, and it's about the Sun — specifically the Modern Maximum (Cycles 17–22, roughly 1933–2008) being unusually active and the last two cycles being unusually quiet. Cycle 25 (now active) has already produced one G5 event (May 2024).
 
+**Above vs. below the trend lines:** A year's bar *above* either trend line had more Kp≥7 days than the corresponding average; *below* the line had fewer. The 1960 and 1991 bars rise highest (Cycle 19 and Cycle 22 peaks, both well above any of the trend lines). The mid-2000s and 2010s bars often sit *below* both trend lines, which is the visible signature of the post-2008 solar slowdown that drives the negative slopes.
+
 ![Mid-latitude aurora days](figures/05_aurora_days.png)
 
 ### F10.7 vs sunspot number (the cross-validation)
 
 F10.7 cm radio flux is measured by a single instrument, isn't subject to visual-observer bias, and tracks the same underlying solar activity as the sunspot count. Daily Pearson r ≈ 0.93 since 1947 — the v2.0 sunspot series and the radio flux are measuring the same Sun.
+
+**Above vs. below the regression line:** Dots *above* the best-fit line are days when F10.7 was higher than the sunspot number alone would predict; dots *below* are days when F10.7 was lower than the sunspot count would predict. The tightness of the cloud around the line is the cross-validation — a tight cloud (which is what we see, r=0.93) means the two independent measurements of solar activity agree very well. Big residuals (dots far from the line in either direction) tend to fall on days with active-region complexity that drives radio emission differently from visible spot count — i.e., they're a feature, not a bug.
 
 ![F10.7 vs sunspot](figures/06_f107_vs_sunspot.png)
 
