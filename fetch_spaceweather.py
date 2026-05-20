@@ -27,7 +27,7 @@ from pathlib import Path
 import requests
 
 SILSO_URL = "https://www.sidc.be/SILSO/INFO/sndtotcsv.php"
-GFZ_URL = "https://kp.gfz.de/app/files/Kp_ap_Ap_SN_F107_since_1932.txt"
+GFZ_URL = "https://kp.gfz.de/fileadmin/files_for_gfz_cms/Kp_ap_Ap_SN_F107_since_1932.txt"
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS silso_daily (
