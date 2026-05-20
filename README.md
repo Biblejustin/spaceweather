@@ -1,6 +1,6 @@
 # Space Weather
 
-Pull two long-running space weather records into a local SQLite database, then explore them in a Jupyter notebook.
+Pull two long-running space weather records into a local SQLite database, then explore them in a Jupyter notebook. One of 10 sibling repos analyzed together — see the [`correlations`](https://github.com/Biblejustin/correlations) hub for the cross-repo analysis.
 
 ## What it does
 
